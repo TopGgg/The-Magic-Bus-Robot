@@ -1,11 +1,9 @@
-import json
-
 import socketio
 from socketio import Client
 
 sio = None
 try:
-    MAIN_HOST = 'http://localhost:5000'
+    MAIN_HOST = 'http://38.242.196.170'
     sio: Client = socketio.Client()
     sio.connect(MAIN_HOST, namespaces=['/robot'])
     print('Connected to {}'.format(MAIN_HOST))
