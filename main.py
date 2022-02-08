@@ -14,9 +14,9 @@ key = "PN6k6R_UDkO5P4UMgfiXKAn243odcQn0Ku-U-hmy7JdARZssHrAGUUeAqA5XdhoNqQRpBCipp
 fr = LargeMotor(OUTPUT_B)
 fl = LargeMotor(OUTPUT_C)
 
+br = LargeMotor(OUTPUT_D)
+bl = LargeMotor(OUTPUT_A)
 
-# br = LargeMotor(OUTPUT_D)
-# bl = LargeMotor(OUTPUT_A)
 
 def horn():
     s = Sound()
@@ -29,14 +29,19 @@ def move(station):
     sleep(1.5)
     Thread(target=lambda: fr.on_for_seconds(speed=SpeedDPM(-36000), seconds=3), daemon=True).start()
     Thread(target=lambda: fl.on_for_seconds(speed=SpeedDPM(-36000), seconds=3), daemon=True).start()
-    # Thread(target=lambda: br.on_for_seconds(speed=-SpeedDPM(36000), seconds=3), daemon=True).start()
-    # Thread(target=lambda: bl.on_for_seconds(speed=-SpeedDPM(36000), seconds=3), daemon=True).start()
+    Thread(target=lambda: br.on_for_seconds(speed=SpeedDPM(-36000), seconds=3), daemon=True).start()
+    Thread(target=lambda: bl.on_for_seconds(speed=SpeedDPM(-36000), seconds=3), daemon=True).start()
 
 
 try:
     # MAIN_HOST = 'http://38.242.196.170'
     MAIN_HOST = 'http://38.242.196.170/robotPull'
     first = True
+    if not MAIN_HOST.startswith("http"):
+        raise RuntimeError("Incorrect and possibly insecure protocol in url")
+
+    req = Request(MAIN_HOST)
+    urlopen(req).read().decode()
     while True:
 
         if not MAIN_HOST.startswith("http"):
