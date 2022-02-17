@@ -31,6 +31,11 @@ def move(station):
     Thread(target=lambda: fl.on_for_seconds(speed=SpeedDPM(-36000), seconds=3), daemon=True).start()
     Thread(target=lambda: br.on_for_seconds(speed=SpeedDPM(-36000), seconds=3), daemon=True).start()
     Thread(target=lambda: bl.on_for_seconds(speed=SpeedDPM(-36000), seconds=3), daemon=True).start()
+    sleep(3)
+    Thread(target=lambda: fr.on_for_seconds(speed=SpeedDPM(26000), seconds=15), daemon=True).start()
+    Thread(target=lambda: fl.on_for_seconds(speed=SpeedDPM(-26000), seconds=15), daemon=True).start()
+    Thread(target=lambda: br.on_for_seconds(speed=SpeedDPM(26000), seconds=15), daemon=True).start()
+    Thread(target=lambda: bl.on_for_seconds(speed=SpeedDPM(-26000), seconds=15), daemon=True).start()
 
 
 try:
